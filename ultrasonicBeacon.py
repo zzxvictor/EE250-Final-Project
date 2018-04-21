@@ -33,14 +33,19 @@ def signalProcessing():
     sensorList1[-1] = sum (sensorList1[-1*WINDOW:])/WINDOW
     sensorList2[-1] = sum (sensorList2[-1*WINDOW:])/WINDOW
   
-     
+def convertToDistance():
+  global sensorList1
+  global sensorList2
+  dist1 = sensorList1[-1]
+  dist2 = sensorList2[-1]
+  print (str(dist1) + " cm from sensor1")
+  print (str(dist1) + " cm from sensor2")
   
-
 def main ():
   while(True):
     readSerial()
     signalProcessing()
-    
+    convertToDistance()
   
 main ()
   
