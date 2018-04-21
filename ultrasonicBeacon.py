@@ -29,8 +29,8 @@ def signalProcessing():
   global sensorList1
   global sensorList2
   #moving average filter
-  sensorList1[-1:] = sum (sensorList1[-1*WINDOW:])/WINDOW
-  sensorList2[-1:] = sum (sensorList2[-1*WINDOW:])/WINDOW
+  sensorList1[-1] = sum (sensorList1[-1*WINDOW:])/WINDOW
+  sensorList2[-1] = sum (sensorList2[-1*WINDOW:])/WINDOW
   
      
   
