@@ -13,8 +13,11 @@ def readSerial():
   data = x.decode()
   results = re.split('[+ \r \n]',data)
   print (results)
-  sensorList1.append(int (results[0]))
-  sensorList2.append(int (results[1]))
+  try:
+    sensorList1.append(int (results[0]))
+    sensorList2.append(int (results[1]))
+  except ValueError:
+    print ("value error")
   #sensorList1 = sensorList1[-1*LEGNTH:]
   #sensorList2 = sensorList2[-1*LEGNTH:]
   
