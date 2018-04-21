@@ -11,11 +11,7 @@ def readSerial():
   x=ser.readline()
   print (x)
   data = x.decode()
-  print ("xxx" + data )
-  data = list (x)
-  print ("yyy" + data )
-  data = str(x, 'utf-8')
-  print ("zzz" + data )
+  print (data)
   #data.split(",")
   #print (data )
   
