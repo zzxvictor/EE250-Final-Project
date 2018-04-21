@@ -8,7 +8,7 @@ LEGNTH = 50
 def readSerial():
   sensorList1 = []
   sensorList2 = []
-  x=ser.read()
+  x=ser.readline()
   data = x.decode()
   print (data)
   
