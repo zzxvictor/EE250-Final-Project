@@ -9,7 +9,7 @@ def readSerial():
   sensorList1 = []
   sensorList2 = []
   x=ser.read()
-  data = x.decode("utf-8")
+  data = x.decode("ascii")
   data = data.split('+')
   print (data) 
   #print (data[0])
