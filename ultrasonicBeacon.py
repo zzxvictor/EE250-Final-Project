@@ -4,7 +4,7 @@ import re
 #import pandas
 
 ser = serial.Serial(port='/dev/ttyACM0',baudrate = 9600,parity=serial.PARITY_NONE,stopbits=serial.STOPBITS_ONE,bytesize=serial.EIGHTBITS,timeout=1)
-WINDOW = 10
+WINDOW = 5
 LEGNTH = 30
 sensorList1 = []
 sensorList2 = []
