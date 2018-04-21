@@ -10,7 +10,7 @@ def readSerial():
   sensorList2 = []
   x=ser.readline()
   data = x.decode()
-  print (data)
+  print (data.split('+'))
   
   sensorList1.append(data)
   sensorList2.append(data)
