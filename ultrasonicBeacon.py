@@ -4,4 +4,4 @@ ser = serial.Serial(port='/dev/ttyACM0',baudrate = 9600,parity=serial.PARITY_NON
 counter=0
 while 1:
   x=ser.readline()
-  print (X)
+  print (x)
