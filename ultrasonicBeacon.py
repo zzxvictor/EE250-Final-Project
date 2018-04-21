@@ -32,6 +32,7 @@ def signalProcessing():
   if len(sensorList1) > WINDOW:
     sensorList1[-1] = sum (sensorList1[-1*WINDOW:])/WINDOW
     sensorList2[-1] = sum (sensorList2[-1*WINDOW:])/WINDOW
+    convertToDistance()
   
 def convertToDistance():
   global sensorList1
@@ -45,7 +46,7 @@ def main ():
   while(True):
     readSerial()
     signalProcessing()
-    convertToDistance()
+    
   
 main ()
   
