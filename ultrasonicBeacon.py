@@ -1,7 +1,7 @@
 import time
 import serial
 import re
-import pandas
+#import pandas
 
 ser = serial.Serial(port='/dev/ttyACM0',baudrate = 9600,parity=serial.PARITY_NONE,stopbits=serial.STOPBITS_ONE,bytesize=serial.EIGHTBITS,timeout=1)
 WINDOW = 5
@@ -29,9 +29,10 @@ def signalProcessing():
   global sensorList1
   global sensorList2
   #moving average filter
-  sensorList1 = pandas.rolling_mean(sensorList1, WINDOW)
-  sensorList2 = pandas.rolling_mean(sensorList2, WINDOW)
+  sensorList1[-1] = sum (sensorList1[-1*WINDOW:])/WINDOW
+  sensorList2[-1] = sum (sensorList2[-1*WINDOW:])/WINDOW
   
+     
   
 
 def main ():
