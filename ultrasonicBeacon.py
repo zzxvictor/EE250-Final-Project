@@ -15,8 +15,8 @@ def readSerial():
   
   sensorList1.append(data[0])
   sensorList2.append(data[1])
-  sensorList1 = sensorList1[-1*LEGNTH:]
-  sensorList2 = sensorList2[-1*LEGNTH:]
+  #sensorList1 = sensorList1[-1*LEGNTH:]
+  #sensorList2 = sensorList2[-1*LEGNTH:]
   
   return sensorList1, sensorList2
 
