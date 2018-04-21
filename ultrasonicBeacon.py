@@ -1,5 +1,6 @@
 import time
 import serial
+import re
 ser = serial.Serial(port='/dev/ttyACM0',baudrate = 9600,parity=serial.PARITY_NONE,stopbits=serial.STOPBITS_ONE,bytesize=serial.EIGHTBITS,timeout=1)
 WINDOW = 5
 LEGNTH = 50
@@ -10,8 +11,8 @@ def readSerial():
   sensorList2 = []
   x=ser.readline()
   data = x.decode()
-  print (data.split('+'))
-  
+  results = re.split('[, \r \n]',data)
+  print (results)
   sensorList1.append(data)
   sensorList2.append(data)
   #sensorList1 = sensorList1[-1*LEGNTH:]
