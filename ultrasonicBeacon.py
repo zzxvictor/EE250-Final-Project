@@ -13,9 +13,9 @@ def readSerial():
   data.split(',')
   print (data) 
   print (data[0])
-  print (data[1])
-  print (data[2])
-  print (data[3])
+  #print (data[1])
+  #print (data[2])
+  #print (data[3])
   
   sensorList1.append(data)
   sensorList2.append(data)
