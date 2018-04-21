@@ -15,8 +15,8 @@ def readSerial():
   #data.split(",")
   #print (data )
   
-  sensorList1.append(data[0])
-  sensorList2.append(data[1])
+  sensorList1.append(data)
+  sensorList2.append(data)
   #sensorList1 = sensorList1[-1*LEGNTH:]
   #sensorList2 = sensorList2[-1*LEGNTH:]
   
