@@ -39,7 +39,7 @@ def convertToDistance():
   dist1 = sensorList1[-1]
   dist2 = sensorList2[-1]
   print (str(dist1) + " cm from sensor1")
-  print (str(dist1) + " cm from sensor2")
+  print (str(dist2) + " cm from sensor2")
   
 def main ():
   while(True):
