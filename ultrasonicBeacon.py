@@ -14,6 +14,7 @@ def readSerial():
   global sensorList2 
   x=ser.readline()
   data = x.decode()
+  print (data)
   results = re.split('[+ \r \n]',data)
   try:
     sensorList1.append(int (results[0]))
