@@ -28,9 +28,10 @@ def readSerial():
   results = []
   x=ser.readline()
   print (x)
-  data = x.decode ()
-  print (data)
-  results = re.split('[+ \r \n]',data)
+  #data = x.decode ()
+  #print (data)
+  #results = re.split('[+ \r \n]',data)
+  results = list (b(x))
   print (results)
 """
   try:
