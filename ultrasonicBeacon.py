@@ -30,6 +30,8 @@ def readSerial():
   print (x)
   data = x.decode ()
   print (data)
+  results = re.split('[+ \r \n]',data)
+  print (results)
 """
   try:
    data = x.decode()
