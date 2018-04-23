@@ -31,7 +31,7 @@ def readSerial():
   try:
    data = x.decode()
    results = re.split('[+ \r \n]',data)
-   
+   print (results)
   except UnicodeDecodeError:
    print ("*********")
    
