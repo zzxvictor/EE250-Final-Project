@@ -28,6 +28,8 @@ def readSerial():
   results = []
   x=ser.readline()
   print (x)
+  data = x.decode ()
+  print (data)
 """
   try:
    data = x.decode()
