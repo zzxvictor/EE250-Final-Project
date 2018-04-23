@@ -31,7 +31,7 @@ def readSerial():
   #data = x.decode ()
   #print (data)
   #results = re.split('[+ \r \n]',data)
-  results = list ((x))
+  results = x.decode ("ascii")
   print (results)
 """
   try:
