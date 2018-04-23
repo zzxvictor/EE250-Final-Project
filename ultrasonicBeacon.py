@@ -30,8 +30,11 @@ def readSerial():
   try:
    data = x.decode()
    results = re.split('[+ \r \n]',data)
-   sensorList1.append(int (results[0]))
-   sensorList2.append(int (results[1]))
+   try:
+      sensorList1.append(int (results[0]))
+      sensorList2.append(int (results[1]))
+   except ValueError:
+      print ("******")
   except UnicodeDecodeError:
    print ("*********")
    
