@@ -28,6 +28,7 @@ def readSerial():
   results = []
   x=ser.readline()
   print (x)
+"""
   try:
    data = x.decode()
    results = re.split('[+ \r \n]',data)
@@ -42,7 +43,7 @@ def readSerial():
       print ("******") 
   
   sensorList1 = sensorList1[-1*LEGNTH:]
-  sensorList2 = sensorList2[-1*LEGNTH:]
+  sensorList2 = sensorList2[-1*LEGNTH:]"""
 
   
 def signalProcessing():
