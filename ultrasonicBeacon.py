@@ -38,6 +38,8 @@ def readSerial():
    return 
   print (results)
   
+  sensorList1.append(int (results[0]))
+  sensorList2.append(int (results[1]))
   sensorList1 = sensorList1[-1*LEGNTH:]
   sensorList2 = sensorList2[-1*LEGNTH:]
    
@@ -65,14 +67,6 @@ def signalProcessing():
   print (sensorList1)
   print (sensorList2)
   
-def convertToDistance():
-  global sensorList1
-  global sensorList2
-  dist1 = sensorList1[-1]
-  dist2 = sensorList2[-1]
-  print (str(dist1) + " cm from sensor1")
-  print (str(dist2) + " cm from sensor2")
-  print ("____----------------------------____")
   
 def main ():
   client = mqtt.Client()
