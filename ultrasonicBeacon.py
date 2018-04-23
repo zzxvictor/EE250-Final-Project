@@ -38,7 +38,7 @@ def readSerial():
   try:
       sensorList1.append(int (results[0]))
       sensorList2.append(int (results[1]))
-   except ValueError:
+  except ValueError:
       print ("******") 
   
   sensorList1 = sensorList1[-1*LEGNTH:]
