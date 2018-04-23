@@ -28,12 +28,17 @@ def readSerial():
   results = []
   x=ser.readline()
   print (x)
-  #data = x.decode ()
-  #print (data)
-  #results = re.split('[+ \r \n]',data)
-  data = x.decode ("ascii")
-  results = re.split('[+ \r \n]',data)
+  try:
+   data = x.decode ("ascii")
+  except UnicodeDecodeError:
+   return 
+  try:
+   results = re.split('[+ \r \n]',data)
+  except ValueError:
+   return 
   print (results)
+   
+   
 """
   try:
    data = x.decode()
