@@ -31,12 +31,13 @@ def readSerial():
   #data = x.decode ()
   #print (data)
   #results = re.split('[+ \r \n]',data)
-  results = x.decode ("ascii")
+  data = x.decode ("ascii")
+  results = re.split('[+ \r \n]',data)
   print (results)
 """
   try:
    data = x.decode()
-   results = re.split('[+ \r \n]',data)
+   
    print (results)
   except UnicodeDecodeError:
    print ("*********")
