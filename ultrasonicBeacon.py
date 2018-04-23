@@ -1,13 +1,26 @@
 import time
 import serial
 import re
-#import pandas
+import sys
+import paho.mqtt.client as mqtt
 
 ser = serial.Serial(port='/dev/ttyACM0',baudrate = 9600,parity=serial.PARITY_NONE,stopbits=serial.STOPBITS_ONE,bytesize=serial.EIGHTBITS,timeout=1)
 WINDOW = 1
 LEGNTH = 30
 sensorList1 = []
 sensorList2 = []
+
+def commandCallBack(client, userdata, message):
+   print ("command received")
+
+
+def on_connect(client, userdata, flags, rc):
+    print("Connected to server (i.e., broker) with result code "+str(rc))
+    client.subscribe("anrg-pi1/lcd")
+    client.message_callback_add("anrg-pi1/led", commandCallBack)
+    
+def on_message(client, userdata, msg):
+    print("on_message: " + msg.topic + " " + str(msg.payload))
 
 def readSerial():
   global sensorList1 
@@ -29,11 +42,8 @@ def readSerial():
 def signalProcessing():
   global sensorList1
   global sensorList2
-  #moving average filter
-  if len(sensorList1) > WINDOW:
-    sensorList1[-1] = sum (sensorList1[-1*WINDOW:])/WINDOW
-    sensorList2[-1] = sum (sensorList2[-1*WINDOW:])/WINDOW
-    convertToDistance()
+  print (sensorList1)
+  print (sensorList2)
   
 def convertToDistance():
   global sensorList1
@@ -45,6 +55,11 @@ def convertToDistance():
   print ("____----------------------------____")
   
 def main ():
+  client = mqtt.Client()
+  client.on_message = on_message
+  client.on_connect = on_connect
+  client.connect(host="eclipse.usc.edu", port=11000, keepalive=60)
+  client.loop_start()
   while(True):
     readSerial()
     signalProcessing()
