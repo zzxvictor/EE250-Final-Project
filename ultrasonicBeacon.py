@@ -4,7 +4,7 @@ import re
 import sys
 import paho.mqtt.client as mqtt
 
-ser = serial.Serial(port='/dev/ttyACM0',baudrate = 9600,parity=serial.PARITY_NONE,stopbits=serial.STOPBITS_ONE,bytesize=serial.EIGHTBITS,timeout=1)
+ser = serial.Serial(port='/dev/ttyACM0',baudrate = 4800,parity=serial.PARITY_NONE,stopbits=serial.STOPBITS_ONE,bytesize=serial.EIGHTBITS,timeout=1)
 WINDOW = 1
 LEGNTH = 30
 sensorList1 = []
