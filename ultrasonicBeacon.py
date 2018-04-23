@@ -25,20 +25,22 @@ def on_message(client, userdata, msg):
 def readSerial():
   global sensorList1 
   global sensorList2 
+  results = []
   x=ser.readline()
   print (x)
   try:
    data = x.decode()
    results = re.split('[+ \r \n]',data)
-   try:
-      sensorList1.append(int (results[0]))
-      sensorList2.append(int (results[1]))
-   except ValueError:
-      print ("******")
+   
   except UnicodeDecodeError:
    print ("*********")
    
-    
+  try:
+      sensorList1.append(int (results[0]))
+      sensorList2.append(int (results[1]))
+   except ValueError:
+      print ("******") 
+  
   sensorList1 = sensorList1[-1*LEGNTH:]
   sensorList2 = sensorList2[-1*LEGNTH:]
 
