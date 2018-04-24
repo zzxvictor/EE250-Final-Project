@@ -6,6 +6,7 @@ import paho.mqtt.client as mqtt
 
 ser = serial.Serial(port='/dev/ttyACM0',baudrate = 19200,parity=serial.PARITY_NONE,stopbits=serial.STOPBITS_ONE,bytesize=serial.EIGHTBITS,timeout=1)
 flag = 0
+WINDOW = 50
 sensorList1 = []
 sensorList2 = []
 
@@ -61,6 +62,8 @@ def readSerial():
   try:
    sensorList1.append(int (results[0]))
    sensorList2.append(int (results[1]))
+   sensorList1 = sensorList1[-1*WINDOW:]
+   sensorList2 = sensorList2[-1*WINDOW:]
   except ValueError:
    return 
    
@@ -70,14 +73,14 @@ def signalProcessing(client):
   global sensorList2
   global oX
   global oY
-  if len(sensorList1) > 5 and len(sensorList2) >5:
+  if len(sensorList1) > 10 and len(sensorList2) >10:
    #print (sensorList1[-1] - oX)
    print (sensorList1[-1])
    print (sensorList2[-1])
    print ("*************")
-   if sensorList1[-1] - sensorList1[-3] > 1:
+   if sensorList1[-1] - sensorList1[-10] > 1:
       client.publish("pololu-13/move",'w')
-   elif sensorList1[-1] - sensorList1[-3]< -1:
+   elif sensorList1[-1] - sensorList1[-10]< -1:
       client.publish("pololu-13/move",'s')
    else:
       print ("XXXXXX")
