@@ -73,15 +73,15 @@ def signalProcessing(client):
   global oY
   if len(sensorList1) != 0 and len(sensorList2) !=0:
    #print (sensorList1[-1] - oX)
-   if sensorList1[-1] - oX > 0:
+   if sensorList1[-1] - oX > 1:
       client.publish("pololu-13/move",'w')
-   elif sensorList1[-1] - oX < 0:
+   elif sensorList1[-1] - oX < -1:
       client.publish("pololu-13/move",'s')
    
    #print (sensorList2[-1] - oY)
-   if sensorList2[-1] - oY > 0:
+   if sensorList2[-1] - oY > 1:
       client.publish("pololu-13/move",'a')
-   elif sensorList2[-1] - oY < 0:
+   elif sensorList2[-1] - oY < -1:
       client.publish("pololu-13/move",'d')
       
    if len(sensorList1) != 0 and len(sensorList2) !=0:
