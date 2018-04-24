@@ -24,7 +24,7 @@ def commandCallBack(client, userdata, message):
 def on_connect(client, userdata, flags, rc):
     print("Connected to server (i.e., broker) with result code "+str(rc))
     client.subscribe("pololu-13/record")
-    client.message_callback_add("anrg-pi1/lcd", commandCallBack)
+    client.message_callback_add("pololu-13/record", commandCallBack)
     
 def on_message(client, userdata, msg):
     print("on_message: " + msg.topic + " " + str(msg.payload))
