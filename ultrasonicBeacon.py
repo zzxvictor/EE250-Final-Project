@@ -85,8 +85,8 @@ def signalProcessing(client):
       client.publish("pololu-13/move",'d')
       
    if len(sensorList1) != 0 and len(sensorList2) !=0:
-      oX = sensorList1[-1]
-      oY = sensorList2[-1]
+      oX = sensorList1[-3]
+      oY = sensorList2[-3]
   
 def main ():
   global flag
