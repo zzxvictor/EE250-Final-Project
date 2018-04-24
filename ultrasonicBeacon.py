@@ -13,6 +13,7 @@ sensorList2 = []
 
 def commandCallBack(client, userdata, message):
    global flag 
+   msg = str(message.payload, "utf-8")
    print ("command received")
    if (msg.payload == 'start'):
       flag = 1
