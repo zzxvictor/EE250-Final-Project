@@ -71,18 +71,18 @@ def signalProcessing(client):
   global sensorList2
   global oX
   global oY
-  if len(sensorList1) > 1 and len(sensorList2) >1:
+  if len(sensorList1) > 5 and len(sensorList2) >5:
    #print (sensorList1[-1] - oX)
-   if sensorList1[-1] - sensorList1[-2] > 1:
+   if sensorList1[-1] - sensorList1[-3] > 1:
       client.publish("pololu-13/move",'w')
-   elif sensorList1[-1] - sensorList1[-2]< -1:
+   elif sensorList1[-1] - sensorList1[-3]< -1:
       client.publish("pololu-13/move",'s')
    else:
       print ("XXXXXX")
    #print (sensorList2[-1] - oY)
-   if sensorList2[-1] - sensorList2[-2] > 1:
+   if sensorList2[-1] - sensorList2[-3] > 1:
       client.publish("pololu-13/move",'a')
-   elif sensorList2[-1] - sensorList2[-2] < -1:
+   elif sensorList2[-1] - sensorList2[-3] < -1:
       client.publish("pololu-13/move",'d')
    else:
       print ("XXXXXX")
