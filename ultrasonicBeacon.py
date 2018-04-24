@@ -28,8 +28,8 @@ def originCallBack (client, userdata, message):
    msg = str(message.payload, "utf-8")
    if (msg == 'set'):
       if len(sensorList1) != 0 and len(sensorList2) !=0:
-         oX = sensorList1[-1])
-         oY = sensorList2[-1])
+         oX = sensorList1[-1]
+         oY = sensorList2[-1]
          print (oX)
          print (oY)
       
