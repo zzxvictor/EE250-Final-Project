@@ -9,6 +9,9 @@ WINDOW = 1
 LEGNTH = 30
 sensorList1 = []
 sensorList2 = []
+oX = 0
+oY = 0
+
 
 def commandCallBack(client, userdata, message):
    print ("command received")
@@ -49,8 +52,11 @@ def readSerial():
 def signalProcessing():
   global sensorList1
   global sensorList2
-  print (sensorList1[-1:])
-  print (sensorList2[-1:])
+  global oX
+  global oY
+   
+  print (sensorList1[-1:] - oX)
+  print (sensorList2[-1:] - oY)
   
   
 def main ():
