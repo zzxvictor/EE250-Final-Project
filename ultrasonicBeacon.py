@@ -49,8 +49,8 @@ def readSerial():
 def signalProcessing():
   global sensorList1
   global sensorList2
-  print (sensorList1[-1])
-  print (sensorList2[-1])
+  print (sensorList1[-1:])
+  print (sensorList2[-1:])
   
   
 def main ():
