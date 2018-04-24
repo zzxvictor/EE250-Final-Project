@@ -66,7 +66,7 @@ def readSerial():
    return 
    
   
-def signalProcessing():
+def signalProcessing(client):
   global sensorList1
   global sensorList2
   global oX
@@ -94,7 +94,7 @@ def main ():
   while(True):
     if flag == 1:
          readSerial()
-         signalProcessing()
+         signalProcessing(client)
 
     
 main ()
