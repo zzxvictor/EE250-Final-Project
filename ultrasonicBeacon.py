@@ -6,7 +6,6 @@ import paho.mqtt.client as mqtt
 
 ser = serial.Serial(port='/dev/ttyACM0',baudrate = 19200,parity=serial.PARITY_NONE,stopbits=serial.STOPBITS_ONE,bytesize=serial.EIGHTBITS,timeout=1)
 WINDOW = 1
-LEGNTH = 30
 sensorList1 = []
 sensorList2 = []
 oX = 0
@@ -15,6 +14,8 @@ oY = 0
 
 def commandCallBack(client, userdata, message):
    print ("command received")
+   if (msg.payload == 'start'):
+      readSerial()
 
 
 def on_connect(client, userdata, flags, rc):
@@ -43,8 +44,6 @@ def readSerial():
   try:
    sensorList1.append(int (results[0]))
    sensorList2.append(int (results[1]))
-   sensorList1 = sensorList1[-1*LEGNTH:]
-   sensorList2 = sensorList2[-1*LEGNTH:]
   except ValueError:
    return 
    
@@ -66,7 +65,7 @@ def main ():
   client.connect(host="eclipse.usc.edu", port=11000, keepalive=60)
   client.loop_start()
   while(True):
-    readSerial()
+    
     signalProcessing()
     
 main ()
