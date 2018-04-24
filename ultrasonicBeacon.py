@@ -8,8 +8,7 @@ ser = serial.Serial(port='/dev/ttyACM0',baudrate = 19200,parity=serial.PARITY_NO
 flag = 0
 sensorList1 = []
 sensorList2 = []
-oX = 0
-oY = 0
+
 
 
 def commandCallBack(client, userdata, message):
@@ -73,6 +72,9 @@ def signalProcessing(client):
   global oY
   if len(sensorList1) > 5 and len(sensorList2) >5:
    #print (sensorList1[-1] - oX)
+   print (sensorList1[-1])
+   print (sensorList2[-1])
+   print ("*************")
    if sensorList1[-1] - sensorList1[-3] > 1:
       client.publish("pololu-13/move",'w')
    elif sensorList1[-1] - sensorList1[-3]< -1:
