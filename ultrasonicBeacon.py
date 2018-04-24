@@ -45,29 +45,12 @@ def readSerial():
   except ValueError:
    return 
    
-"""
-  try:
-   data = x.decode()
-   
-   print (results)
-  except UnicodeDecodeError:
-   print ("*********")
-   
-  try:
-      sensorList1.append(int (results[0]))
-      sensorList2.append(int (results[1]))
-  except ValueError:
-      print ("******") 
-  
-  sensorList1 = sensorList1[-1*LEGNTH:]
-  sensorList2 = sensorList2[-1*LEGNTH:]"""
-
   
 def signalProcessing():
   global sensorList1
   global sensorList2
-  print (sensorList1)
-  print (sensorList2)
+  print (sensorList1[-1])
+  print (sensorList2[-1])
   
   
 def main ():
