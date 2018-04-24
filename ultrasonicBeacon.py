@@ -54,9 +54,9 @@ def signalProcessing():
   global sensorList2
   global oX
   global oY
-   
-  print (sensorList1[-1] - oX)
-  print (sensorList2[-1] - oY)
+  if len(sensorList1) != 0 and len(sensorList2) !=0:
+   print (sensorList1[-1] - oX)
+   print (sensorList2[-1] - oY)
   
   
 def main ():
