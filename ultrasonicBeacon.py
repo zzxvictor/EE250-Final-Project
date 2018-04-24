@@ -8,7 +8,8 @@ ser = serial.Serial(port='/dev/ttyACM0',baudrate = 19200,parity=serial.PARITY_NO
 flag = 0
 sensorList1 = []
 sensorList2 = []
-
+oX = 0
+oY = 0
 
 
 def commandCallBack(client, userdata, message):
@@ -19,12 +20,25 @@ def commandCallBack(client, userdata, message):
       flag = 1
    elif (msg == 'end'):
       flag = 0
-
-
+def originCallBack (client, userdata, message):
+   global sensorList1 
+   global sensorList2
+   global oX
+   global oY
+   msg = str(message.payload, "utf-8")
+   if (msg == 'set'):
+      if len(sensorList1) != 0 and len(sensorList2) !=0:
+         oX = sensorList1[-1])
+         oY = sensorList2[-1])
+         print (oX)
+         print (oY)
+      
 def on_connect(client, userdata, flags, rc):
     print("Connected to server (i.e., broker) with result code "+str(rc))
     client.subscribe("pololu-13/record")
+    client.subscribe("pololu-13/origin")
     client.message_callback_add("pololu-13/record", commandCallBack)
+    client.message_callback_add("pololu-13/origin", originCallBack)
     
 def on_message(client, userdata, msg):
     print("on_message: " + msg.topic + " " + str(msg.payload))
@@ -54,9 +68,11 @@ def readSerial():
 def signalProcessing():
   global sensorList1
   global sensorList2
+  global oX
+  global oY
   if len(sensorList1) != 0 and len(sensorList2) !=0:
-   print (sensorList1[-1])
-   print (sensorList2[-1])
+   print (sensorList1[-1] - oX)
+   print (sensorList2[-1] - oY)
   
   
 def main ():
