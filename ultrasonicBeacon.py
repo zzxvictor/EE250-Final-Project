@@ -37,6 +37,7 @@ def on_connect(client, userdata, flags, rc):
     print("Connected to server (i.e., broker) with result code "+str(rc))
     client.subscribe("pololu-13/record")
     client.subscribe("pololu-13/origin")
+    client.subscribe("pololu-13/move")
     client.message_callback_add("pololu-13/record", commandCallBack)
     client.message_callback_add("pololu-13/origin", originCallBack)
     
@@ -72,8 +73,16 @@ def signalProcessing():
   global oY
   if len(sensorList1) != 0 and len(sensorList2) !=0:
    print (sensorList1[-1] - oX)
+   if sensorList1[-1] - oX > 0:
+      client.publish("pololu-13/move",'w')
+   elif sensorList1[-1] - oX < 0:
+      client.publish("pololu-13/move",'s')
+   
    print (sensorList2[-1] - oY)
-  
+   if sensorList2[-1] - oY > 0:
+      client.publish("pololu-13/move",'a')
+   elif sensorList2[-1] - oY < 0:
+      client.publish("pololu-13/move",'d')
   
 def main ():
   global flag
