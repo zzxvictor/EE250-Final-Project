@@ -27,7 +27,7 @@ def readSerial():
   global sensorList2 
   results = []
   x=ser.readline()
-  print (x)
+  #print (x)
   try:
    data = x.decode ("ascii")
   except UnicodeDecodeError:
@@ -36,7 +36,7 @@ def readSerial():
    results = re.split('[+ \r \n]',data)
   except ValueError:
    return 
-  print (results)
+  #print (results)
   try:
    sensorList1.append(int (results[0]))
    sensorList2.append(int (results[1]))
