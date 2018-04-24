@@ -79,7 +79,7 @@ def signalProcessing(client):
       client.publish("pololu-13/move",'s')
    
    #print (sensorList2[-1] - oY)
-   if sensorList2[-1] - sensorList2[-1] > 1:
+   if sensorList2[-1] - sensorList2[-2] > 1:
       client.publish("pololu-13/move",'a')
    elif sensorList2[-1] - sensorList1[-2] < -1:
       client.publish("pololu-13/move",'d')
