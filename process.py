@@ -3,14 +3,15 @@ import serial
 import re
 import sys
 import paho.mqtt.client as mqtt
-
+import matplotlib.pyplot as mp
 ser = serial.Serial(port='/dev/ttyACM0',baudrate = 19200,parity=serial.PARITY_NONE,stopbits=serial.STOPBITS_ONE,bytesize=serial.EIGHTBITS,timeout=1)
 flag = 0
 replay = 0
 WINDOW = 60
 sensorList1 = []
 sensorList2 = []
-
+temp1 = []
+temp2 = []
 
 def commandCallBack(client, userdata, message):
    global flag 
@@ -66,24 +67,31 @@ def on_message(client, userdata, msg):
 def readSerial():
   global sensorList1 
   global sensorList2 
+  global temp1
+  global temp2 
   results = []
   x=ser.readline()
   #print (x)
   try:
    data = x.decode ("ascii")
   except UnicodeDecodeError:
+   print ('error0')
    return 
   try:
    results = re.split('[+ \r \n]',data)
   except ValueError:
+   print('error1')
    return 
 
   try:
    sensorList1.append(int (results[0]))
+   temp1.append(int (results[0]))
    sensorList2.append(int (results[1]))
+   temp2.append(int (results[1]))
    sensorList1 = sensorList1[-1*WINDOW:]
    sensorList2 = sensorList2[-1*WINDOW:]
   except ValueError:
+   print('error2')
    return 
    
   
@@ -123,6 +131,10 @@ def motionDetectY():
   		print ("------------")"""
 def signalProcessing():
   global flag
+
+  global temp1 
+  global temp2 
+
   xMotionList = []
   yMotionList = []
     #recording
@@ -133,20 +145,50 @@ def signalProcessing():
     #feature extraction
   print (xMotionList)
   print (yMotionList)
+  print ("ploting ")
+  mp.plot(temp1)
+  mp.show()
   return xMotionList , yMotionList
 
   
 def featureExtraction(xMotionList, yMotionList):
   counter = 0
+  merge = []
   timeFeature = []
   motionFeature = []
   for i in range (len (xMotionList)):
   	item = getDirection(xMotionList[i],yMotionList[i])
   	if item != None:
-  		motionFeature.append(item)
+  		merge.append(item)
   print ('------------------------------------------------------')
+  print (merge)
+  print ('------------------------------------------------------')
+  temp = merge[0]
+
+
+  for i in range (len(merge) - 1):
+  	if temp == merge[i+1]:
+  		counter += 1
+  	else:
+  		motionFeature.append(temp)
+  		timeFeature.append(counter)
+  		counter = 0
+  		temp = merge[i + 1]
+  motionFeature.append(temp)
+  timeFeature.append(counter)
+
+
   print (motionFeature)
-  print ('------------------------------------------------------')
+  print (timeFeature)
+  print ("********************************")
+  print ("********************************")
+  for i in range (len(timeFeature) - 1):
+  	if timeFeature[i] > 10:
+  		print (timeFeature[i])
+  		print (motionFeature[i])
+
+
+
   """
   for i in range (len (xMotionList)):
   	if xMotionList[i] != None and yMotionList[i] != None:
@@ -187,8 +229,6 @@ def featureExtraction(xMotionList, yMotionList):
       counter = 0
 """
 
-  print (motionFeature)
-  print (timeFeature)
 
 
 def getDirection(x, y):
