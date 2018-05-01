@@ -80,9 +80,9 @@ def readSerial():
 
   try:
    sensorList1.append(int (results[0]))
-   #sensorList2.append(int (results[1]))
+   sensorList2.append(int (results[1]))
    sensorList1 = sensorList1[-1*WINDOW:]
-   #sensorList2 = sensorList2[-1*WINDOW:]
+   sensorList2 = sensorList2[-1*WINDOW:]
   except ValueError:
    return 
    
@@ -90,10 +90,10 @@ def readSerial():
 def motionDetectX():
   global sensorList1
   if len (sensorList1) == WINDOW:
-    deviat = sum(sensorList1[-20:]) - sum(sensorList1[0:20])
-    if deviat > 60:
+    deviat = sum(sensorList1[-10:]) - sum(sensorList1[0:10])
+    if deviat > 70:
       return 'W'
-    elif deviat < -60:
+    elif deviat < -70:
       return 'S'
     else:
       return '*'
@@ -101,10 +101,10 @@ def motionDetectX():
 def motionDetectY():
   global sensorList2
   if len (sensorList2) == WINDOW:
-    deviat = sum(sensorList2[-20:]) - sum(sensorList2[0:20])
-    if deviat > 60:
+    deviat = sum(sensorList2[-10:]) - sum(sensorList2[0:10])
+    if deviat > 70:
       return 'A'
-    elif deviat < -60:
+    elif deviat < -70:
       return 'D'
     else:
       return '*'
@@ -129,8 +129,10 @@ def signalProcessing():
   while (flag == 1):
     readSerial()
     xMotionList.append(motionDetectX())
-      #yMotionList.append(motionDetectY)
+    yMotionList.append(motionDetectY())
     #feature extraction
+  print (xMotionList)
+  print (yMotionList)
   return xMotionList , yMotionList
 
   
@@ -138,6 +140,35 @@ def featureExtraction(xMotionList, yMotionList):
   counter = 0
   timeFeature = []
   motionFeature = []
+  for i in range (len (xMotionList)):
+  	item = getDirection(xMotionList[i],yMotionList[i])
+  	if item != None:
+  		motionFeature.append(item)
+  print ('------------------------------------------------------')
+  print (motionFeature)
+  print ('------------------------------------------------------')
+  """
+  for i in range (len (xMotionList)):
+  	if xMotionList[i] != None and yMotionList[i] != None:
+  		temp = getDirection(xMotionList[i], yMotionList[i])
+
+  for i in range (len (xMotionList)):
+  	item = getDirection(xMotionList[i], yMotionList[i])
+  	if item == None:
+  		next
+  	elif item == temp:
+  		counter+=1
+  	else:
+  		if counter > 4:
+  			timeFeature.append(counter)
+  			motionFeature.append(temp)
+  			temp = item
+  			counter = 0
+  		else:
+  			counter = 0
+
+"""
+  """
   for item in  xMotionList:
     if item != None:
       temp = item
@@ -154,11 +185,31 @@ def featureExtraction(xMotionList, yMotionList):
         motionFeature.append(temp)
       temp = item
       counter = 0
-
+"""
 
   print (motionFeature)
   print (timeFeature)
 
+
+def getDirection(x, y):
+	if x == 'W' and y == 'A':
+		return 'Q'
+	elif x == 'W' and y == 'D':
+		return 'E'
+	elif x == 'S' and y == 'A':
+		return 'Z'
+	elif x == 'S' and y == 'D':
+		return 'C'
+	elif x == '*' and y == '*':
+		return '*'
+	elif x == '*':
+		return y
+	elif y == '*':
+		return x
+	elif x == None or y == None:
+		return None
+	else:
+		return '0'
   
 def main ():
   #MQTT configuration
