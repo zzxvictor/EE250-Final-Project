@@ -9,7 +9,7 @@ Main functionality:
 
 Major Bugs:
 	sreial port connection is not always stable, sometimes the code captures garbish data
-	the code is not really sensitive and accurate due to the low quality of the sensor/ noisy environment 
+	the code is not as sensitive and accurate as expected due to the low quality of the sensor data/ noisy environment 
 
 April 30 2018
 """
